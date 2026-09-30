@@ -1,0 +1,7 @@
+{
+  "name": "dino-cliker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
