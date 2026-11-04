@@ -1,0 +1,49 @@
+{
+  "levels": [
+    {
+      "nivel": 1,
+      "nombre": "El despertar jurásico",
+      "tiempo": 30,
+      "cantidadDinosaurios": 5,
+      "velocidad": 5,
+      "recompensa": 50,
+      "fondo": "assets/img/nivel1.png"
+    },
+    {
+      "nivel": 2,
+      "nombre": "Peligro en la jungla",
+      "tiempo": 30,
+      "cantidadDinosaurios": 8,
+      "velocidad": 4,
+      "recompensa": 75,
+      "fondo": "assets/img/nivel2.jpg"
+    },
+    {
+      "nivel": 3,
+      "nombre": "El valle perdido",
+      "tiempo": 25,
+      "cantidadDinosaurios": 10,
+      "velocidad": 3,
+      "recompensa": 100,
+      "fondo": "assets/img/nivel3.jpg"
+    },
+    {
+      "nivel": 4,
+      "nombre": "La estampida",
+      "tiempo": 25,
+      "cantidadDinosaurios": 12,
+      "velocidad": 2.5,
+      "recompensa": 150,
+      "fondo": "assets/img/nivel4.jpg"
+    },
+    {
+      "nivel": 5,
+      "nombre": "Rey de los dinosaurios",
+      "tiempo": 20,
+      "cantidadDinosaurios": 15,
+      "velocidad": 2,
+      "recompensa": 250,
+      "fondo": "assets/img/nivel5.jpg"
+    }
+  ]
+}

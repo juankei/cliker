@@ -1,0 +1,255 @@
+
+:host {
+  display: block;
+  height: 100%;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* Fondo principal de la tienda */
+.shop-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 20px;
+  overflow: hidden;
+
+  color: #4b2e1e;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 244, 214, 0.9),
+      transparent 45%
+    ),
+    linear-gradient(145deg, #ead7b0, #d4b484);
+}
+
+/* Título */
+.shop-container h2 {
+  flex-shrink: 0;
+  margin: 0;
+  text-align: center;
+  color: #6b3e25;
+  font-family: 'Bungee', cursive;
+  font-size: clamp(20px, 4vw, 30px);
+  line-height: 1.4;
+  text-shadow: 1px 2px 0 #f7e7c5;
+}
+
+.shop-subtitle {
+  flex-shrink: 0;
+  margin: 8px 0 18px;
+  text-align: center;
+  color: #795438;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Mensaje al comprar */
+.purchase-message {
+  flex-shrink: 0;
+  margin-bottom: 14px;
+  padding: 12px;
+  border: 2px solid #668044;
+  border-radius: 12px;
+
+  background: #e2ebce;
+  color: #36522b;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+
+  box-shadow: 0 3px 0 rgba(74, 52, 29, 0.15);
+}
+
+/* Zona desplazable de los poderes */
+.powers-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 4px 8px 12px 2px;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #9a673b #ead7b0;
+}
+
+/* Barra de scroll para Chrome, Edge y Safari */
+.powers-list::-webkit-scrollbar {
+  width: 9px;
+}
+
+.powers-list::-webkit-scrollbar-track {
+  background: #d5bd94;
+  border-radius: 10px;
+}
+
+.powers-list::-webkit-scrollbar-thumb {
+  background: #98663b;
+  border: 2px solid #d5bd94;
+  border-radius: 10px;
+}
+
+.powers-list::-webkit-scrollbar-thumb:hover {
+  background: #704526;
+}
+
+/* Tarjeta individual */
+.power-card {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 14px;
+
+  padding: 14px;
+  border: 2px solid #a77a4d;
+  border-radius: 16px;
+
+  background: linear-gradient(135deg, #fff2d6, #f0dbb4);
+  box-shadow:
+    0 4px 0 #b18a5d,
+    0 6px 12px rgba(76, 48, 25, 0.13);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.power-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 #b18a5d,
+    0 9px 15px rgba(76, 48, 25, 0.18);
+}
+
+/* Imagen del poder */
+.power-image {
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+
+  object-fit: contain;
+  padding: 5px;
+
+  border: 2px solid #c39a61;
+  border-radius: 14px;
+  background: #e6c99a;
+}
+
+/* Información */
+.power-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.power-info h3 {
+  margin: 0 0 7px;
+  color: #704326;
+  font-family: 'Bungee', cursive;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.power-info p {
+  margin: 0 0 12px;
+  color: #70553c;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Precio y botón */
+.power-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.power-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  color: #795018;
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Botón de comprar */
+.power-footer ion-button {
+  margin: 0;
+
+  --background: #8b542f;
+  --background-hover: #704023;
+  --background-activated: #61371f;
+  --color: #fff0ce;
+  --border-radius: 10px;
+  --box-shadow: 0 3px 0 #59351f;
+
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: none;
+}
+
+.power-footer ion-button::part(native) {
+  min-height: 36px;
+}
+
+/* Botón para salir */
+.exit-button {
+  flex-shrink: 0;
+  margin: 14px 0 0;
+
+  --background: #a34632;
+  --background-hover: #863727;
+  --background-activated: #713023;
+  --color: #fff3df;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 0 #6d3024;
+
+  font-weight: 800;
+  text-transform: none;
+}
+
+.exit-button::part(native) {
+  min-height: 46px;
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 380px) {
+  .shop-container {
+    padding: 14px 10px;
+  }
+
+  .power-card {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .power-image {
+    width: 64px;
+    height: 64px;
+  }
+
+  .power-info h3 {
+    font-size: 12px;
+  }
+
+  .power-info p {
+    font-size: 12px;
+  }
+
+  .power-footer {
+    align-items: flex-start;
+  }
+}

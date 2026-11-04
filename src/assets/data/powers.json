@@ -1,0 +1,35 @@
+
+{"powers":[
+  {
+    "id": 1,
+    "nombre": "Congelación",
+    "precio": 100,
+    "descripcion": "Detiene a todos los dinosaurios durante 5 segundos. Puedes seguir haciendo clic en ellos mientras están congelados.",
+    "duracion": 5,
+    "imagen": "assets/img/congelacion.png"
+  },
+  {
+    "id": 2,
+    "nombre": "Doble recompensa",
+    "precio": 300,
+    "descripcion": "Duplica los puntos y las monedas que consigues al eliminar dinosaurios durante 15 segundos.",
+    "duracion": 15,
+    "imagen": "assets/img/doble.png"
+  },
+  {
+    "id": 3,
+    "nombre": "Tiempo extra",
+    "precio": 250,
+    "descripcion": "Añade 15 segundos al tiempo restante de la partida.",
+    "duracion": 0,
+    "imagen": "assets/img/reloj.png"
+  },
+  {
+    "id": 4,
+    "nombre": "Lentitud jurásica",
+    "precio": 200,
+    "descripcion": "Reduce la velocidad de todos los dinosaurios un 50% durante 10 segundos, sin detenerlos.",
+    "duracion": 10,
+    "imagen": "assets/img/slow.png"
+  }
+]}

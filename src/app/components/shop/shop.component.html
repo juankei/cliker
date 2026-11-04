@@ -1,0 +1,53 @@
+
+<div class="shop-container">
+
+  <h2>Tienda jurásica</h2>
+  <p class="shop-subtitle">¡Elige tus poderes para la aventura!</p>
+
+  @if (mensajeCompra) {
+    <div class="purchase-message" role="status">
+      {{ mensajeCompra }}
+    </div>
+  }
+
+  <div class="powers-list">
+
+    @for (power of powers; track power.id) {
+      <div class="power-card">
+
+        <img
+          [src]="power.imagen"
+          [alt]="power.nombre"
+          class="power-image"
+        />
+
+        <div class="power-info">
+          <h3>{{ power.nombre }}</h3>
+          <p>{{ power.descripcion }}</p>
+
+          <div class="power-footer">
+            <span class="power-price">
+              🪙 {{ power.precio }}
+            </span>
+
+            <ion-button (click)="buyItem(power)">
+              Comprar
+            </ion-button>
+          </div>
+        </div>
+
+      </div>
+    }
+
+  </div>
+
+  <ion-button
+    expand="block"
+    class="exit-button"
+    (click)="exitShop()"
+  >
+    🚪 Salir de la tienda
+  </ion-button>
+
+</div>
+

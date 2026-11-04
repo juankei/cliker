@@ -1,20 +1,183 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+   <ion-content (window:keydown)="handleKeydown($event)">
+  <div
+  class="game-container"
+  [style.background-image]="'url(' + levelData?.fondo + ')'"
+>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <h1 class="game-title">Dino Clicker</h1>
+
+    <div class="game-stats">
+
+<div class="shop-container">
+  <ion-button class="shop-button" expand="block" (click)="openModal()">
+    Abrir tienda
+  </ion-button>
+
+  <span class="shop-shortcut">
+    Pulsa <kbd>ESC</kbd> para abrir
+  </span>
+</div>
+
+      <div class="stat coins">
+        <span class="stat-label">Monedas</span>
+        <span class="stat-value">{{ coins }}</span>
+      </div>
+
+    </div>
+
+@for (dinosaur of dinosaurs; track dinosaur.id) {
+  <div
+    class="dinosaur-test"
+    [class.paused]="isPaused || isFrozen"
+    [class.dino-right]="dinosaur.direction === 'right'"
+    [class.dino-left]="dinosaur.direction === 'left'"
+    [style.top.%]="dinosaur.top"
+    [style.animation-duration.s]="isSlow ? dinosaur.duration * 2 : dinosaur.duration"
+    [style.animation-delay.s]="dinosaur.delay"
+    (click)="killDinosaur(dinosaur.id)"
+  >
+
+    @if (dinosaur.direction === 'right') {
+      <img
+        src="assets/img/raptor_right.png"
+        alt="Raptor"
+        draggable="false"
+      />
+    } @else {
+      <img
+        src="assets/img/raptor_left.png"
+        alt="Raptor"
+        draggable="false"
+      />
+    }
+
+  </div>
+}
+
+
+
+   
+    <div class="game-timer">
+
+      <div class="timer-header">
+            
+      <h2>
+        Nivel {{ currentLevel }}
+        @if (levelData) {
+          — {{ levelData.nombre }}
+        }
+      </h2>
+
+      <p>Tiempo: {{ timeLeft() }} </p>
+      </div>
+
+    <ion-progress-bar [value]="progress()"></ion-progress-bar>
+
+@if (gameState === 'lost') {
+  <div class="game-message">
+    <h2>¡Se acabó el tiempo!</h2>
+
+    <ion-button class="next-level-button" (click)="retryLevel()">
+      Reintentar nivel
+    </ion-button>
+  </div>
+}
+
+@if (gameState === 'won') {
+  <div class="game-message">
+    <h2>¡Nivel completado!</h2>
+    <p>Recompensa: {{ levelData?.recompensa }} monedas</p>
+
+    <ion-button class="next-level-button" (click)="nextLevel()">
+      Siguiente nivel
+    </ion-button>
+  </div>
+}
+
+
+@if (gameState === 'finished') {
+  <div class="game-message">
+    <h2>🏆 ¡Has completado todos los niveles!</h2>
+  </div>
+}
+    </div>
+
+
+<div class="power-buttons">
+
+  @if (hasFreezePower()) {
+    <button
+      class="freeze-button"
+      [disabled]="isFrozen"
+      (click)="activateFreeze()"
+      aria-label="Activar congelación"
+    >
+      <img src="assets/img/congelacion.png" alt="Congelación" />
+      <span class="power-key">1</span>
+      <span class="freeze-count">
+        {{ inventory.filter(item => item === 1).length }}
+      </span>
+      @if (isFrozen) {
+        <span class="freeze-timer">{{ freezeTimeLeft }} s</span>
+      }
+    </button>
+  }
+
+  @if (inventory.includes(2)) {
+    <button
+      class="freeze-button"
+      [disabled]="isDoubleReward"
+      (click)="activateDoubleReward()"
+      aria-label="Activar doble recompensa"
+    >
+      <img src="assets/img/doble.png" alt="Doble recompensa" />
+      <span class="power-key">2</span>
+      <span class="freeze-count">
+        {{ inventory.filter(item => item === 2).length }}
+      </span>
+      @if (isDoubleReward) {
+        <span class="freeze-timer">{{ doubleRewardTimeLeft }} s</span>
+      }
+    </button>
+  }
+
+  @if (inventory.includes(3)) {
+    <button
+      class="freeze-button"
+      (click)="activateExtraTime()"
+      aria-label="Activar tiempo extra"
+    >
+      <img src="assets/img/reloj.png" alt="Tiempo extra" />
+      <span class="power-key">3</span>
+      <span class="freeze-count">
+        {{ inventory.filter(item => item === 3).length }}
+      </span>
+    </button>
+  }
+
+  @if (inventory.includes(4)) {
+    <button
+      class="freeze-button"
+      [disabled]="isSlow"
+      (click)="activateSlow()"
+      aria-label="Activar lentitud jurásica"
+    >
+      <img src="assets/img/slow.png" alt="Lentitud jurásica" />
+      <span class="power-key">4</span>
+      <span class="freeze-count">
+        {{ inventory.filter(item => item === 4).length }}
+      </span>
+      @if (isSlow) {
+        <span class="freeze-timer">{{ slowTimeLeft }} s</span>
+      }
+    </button>
+  }
+
+</div>
+
+
   </div>
 </ion-content>
+
+
