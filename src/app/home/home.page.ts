@@ -1,4 +1,4 @@
-import { Component,signal,OnInit  } from '@angular/core';
+import { Component,signal,OnInit,ChangeDetectorRef  } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IonButton, IonHeader, IonToolbar, IonTitle, IonContent,IonIcon,ToastController,IonCol, IonGrid, IonRow,IonProgressBar } from '@ionic/angular';
 import { ShopComponent } from '../components/shop/shop.component';
@@ -85,7 +85,8 @@ export class HomePage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private http: HttpClient,
-    private sonidosService: SonidosService
+    private sonidosService: SonidosService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -268,6 +269,7 @@ loadDinosaurs() {
     // tanto si ha comprado como si no.
     this.isPaused = false;
     this.isShopOpen = false;
+    this.cdr.detectChanges();
   }
 
   
