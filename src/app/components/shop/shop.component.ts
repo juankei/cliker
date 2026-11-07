@@ -49,7 +49,7 @@ export class ShopComponent implements OnInit {
   powers: Power[] = powers.powers;
   poderComprado: Power | null = null;
   mensajeCompra = '';
-    @Input() coins: number = 0;
+  @Input() coins: number = 0;
   @Input() inventory: number[] = [];
   
   constructor(private http: HttpClient, private modalCtrl: ModalController) {}
@@ -63,26 +63,25 @@ export class ShopComponent implements OnInit {
     console.log('Poderes cargados:', this.powers);
   }
 
-buyItem(item: any) {
+buyItem(item: Power): void {
+  // Comprobar si tienes suficientes monedas
   if (this.coins < item.precio) {
-    this.mensajeCompra = '❌ No tienes suficientes monedas.';
+    this.mensajeCompra = 'No tienes suficientes monedas.';
     return;
   }
 
+  // Restar monedas
   this.coins -= item.precio;
+
+  // Añadir el poder al inventario
   this.inventory.push(item.id);
+
+  // Mostrar mensaje
   this.mensajeCompra = `¡Has comprado ${item.nombre}!`;
 
-  return this.modalCtrl.dismiss(
-    {
-      coins: this.coins,
-      inventory: this.inventory,
-      item: item
-    },
-    'buy'
-  );
+  // IMPORTANTE: No cerrar el modal aquí
+  this.poderComprado = item;
 }
-
 
   trackById(index: number, power: Power): number {
     return power.id;
@@ -91,7 +90,11 @@ buyItem(item: any) {
 
   exitShop(): void {
     this.modalCtrl.dismiss(
-      this.poderComprado,
+      {
+        coins: this.coins,
+        inventory: this.inventory,
+        item: this.poderComprado
+      },
       this.poderComprado ? 'buy' : 'close'
     );
   }

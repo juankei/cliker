@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
   // Configuración de los niveles
   levels: Level[] = levels.levels;
   // Nivel actual
-  currentLevel = 1;
+  currentLevel = 5;
 
   // Datos del nivel que estamos jugando
   levelData: Level | undefined;
@@ -60,6 +60,7 @@ export class HomePage implements OnInit {
   // Estado de la tienda
   isShopOpen = false;
 
+  showVictoryVideo = false;
   // Poderes
 
   // Poder de congelar dinosaurios
@@ -126,6 +127,7 @@ export class HomePage implements OnInit {
 
 
   loadGame() {
+
     // Recuperamos las monedas y el inventario guardados.
     const savedCoins = localStorage.getItem('dinoCoins');
     const savedInventory = localStorage.getItem('dinoInventory');
@@ -195,32 +197,30 @@ loadDinosaurs() {
         // Eliminamos el dinosaurio de la lista.
         // Así deja de aparecer en el juego.
         this.dinosaurs.splice(i, 1);
+        // Guardamos el estado del juego después de eliminar un dinosaurio.
+        this.saveGame();
 
         // Terminamos el bucle porque ya encontramos el dinosaurio.
         break;
       }
     }
 
-    // Comprobamos si se han eliminado todos los dinosaurios.
     if (this.dinosaurs.length === 0) {
-
-      // Cambiamos el estado para indicar que el nivel se ha superado.
       this.gameState = 'won';
 
-      // Detenemos el temporizador del nivel.
       if (this.timerInterval) {
         clearInterval(this.timerInterval);
+        this.timerInterval = undefined;
       }
 
-      // Si tenemos los datos del nivel, añadimos la recompensa.
       if (this.levelData) {
         this.coins += this.levelData.recompensa;
-
-        // Guardamos las monedas y el inventario actual.
         this.saveGame();
       }
 
-      // Mostramos un mensaje en la consola.
+      // Mostrar vídeo de victoria
+      this.showVictoryVideo = true;
+
       console.log('¡Nivel completado!');
     }
   }
@@ -257,11 +257,11 @@ loadDinosaurs() {
 
     // Si se ha realizado una compra y recibimos datos,
     // actualizamos las monedas y el inventario.
-    if (result.role === 'buy' && result.data) {
+    if (result.data) {
       this.coins = result.data.coins;
       this.inventory = result.data.inventory;
 
-      // Guardamos los datos actualizados.
+      //   Guardamos los datos actualizados.
       this.saveGame();
     }
 
@@ -501,6 +501,11 @@ activateSlow() {
     }
   }, 1000);
 }
+onVictoryVideoEnded(): void {
+  this.showVictoryVideo = false;
+}
+
+
 
 }
   

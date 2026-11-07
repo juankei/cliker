@@ -89,9 +89,16 @@
     <h2>¡Nivel completado!</h2>
     <p>Recompensa: {{ levelData?.recompensa }} monedas</p>
 
-    <ion-button class="next-level-button" (click)="nextLevel()">
-      Siguiente nivel
-    </ion-button>
+    @if(levels.length > currentLevel) {
+      <ion-button class="next-level-button" (click)="nextLevel()">
+        Siguiente nivel
+      </ion-button>
+    }@else {
+      <h1>¡Has completado todos los niveles!</h1>
+      <ion-button class="next-level-button" (click)="currentLevel = 1; loadLevel()">
+        Volver al inicio
+      </ion-button>
+    }
   </div>
 }
 
@@ -176,8 +183,28 @@
 
 </div>
 
+@if (showVictoryVideo) {
+  <div class="victory-overlay" >
+
+    <video
+      #victoryVideo
+      autoplay
+      playsinline
+      muted
+      (ended)="onVictoryVideoEnded()"
+    >
+      <source src="assets/video/peluche.mp4" type="video/mp4">
+      Tu navegador no soporta vídeos.
+    </video>
+
+    <button class="skip-video" (click)="onVictoryVideoEnded()">
+      Saltar vídeo
+    </button>
 
   </div>
+  }
+  </div>
+
 </ion-content>
 
 
