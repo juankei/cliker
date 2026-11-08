@@ -59,6 +59,8 @@ export class HomePage implements OnInit {
   dinosaurVisible = true;
   // Estado de la tienda
   isShopOpen = false;
+  // Dinosaurios eliminados
+  dinosaursKilled = 0;
 
   showVictoryVideo = false;
   // Poderes
@@ -173,7 +175,6 @@ loadDinosaurs() {
 }
 
   killDinosaur(id: number) {
-    this.sonidosService.sonarMatar();
     // No permitimos eliminar dinosaurios si la tienda está abierta
     // o si la partida ya no está en curso.
     if (this.isPaused || this.gameState !== 'playing') {
@@ -184,7 +185,7 @@ loadDinosaurs() {
     // el que el jugador ha pulsado.
     for (let i = 0; i < this.dinosaurs.length; i++) {
       if (this.dinosaurs[i].id === id) {
-
+        this.sonidosService.sonarMatar();
         // Sumamos las monedas que recompensa ese dinosaurio.
         if (this.isDoubleReward) {
         // Si el poder está activo, ganamos el doble de monedas
@@ -197,6 +198,8 @@ loadDinosaurs() {
         // Eliminamos el dinosaurio de la lista.
         // Así deja de aparecer en el juego.
         this.dinosaurs.splice(i, 1);
+        // Incrementamos el contador de dinosaurios eliminados.
+        this.dinosaursKilled++;
         // Guardamos el estado del juego después de eliminar un dinosaurio.
         this.saveGame();
 
@@ -218,11 +221,14 @@ loadDinosaurs() {
         this.saveGame();
       }
 
-      // Mostrar vídeo de victoria
-      this.showVictoryVideo = true;
+      if (this.currentLevel === this.levels.length) {
+        this.showVictoryVideo = true;
+      }
 
       console.log('¡Nivel completado!');
     }
+
+    
   }
 
 
@@ -275,7 +281,8 @@ loadDinosaurs() {
   
   loadLevel() {
     this.levelData = undefined;
-
+    // Reiniciamos el contador de dinosaurios eliminados al cargar un nuevo nivel.
+    this.dinosaursKilled = 0;
     for (let i = 0; i < this.levels.length; i++) {
       if (this.levels[i].nivel === this.currentLevel) {
         this.levelData = this.levels[i];

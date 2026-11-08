@@ -8,22 +8,27 @@
     <h1 class="game-title">Dino Clicker</h1>
 
     <div class="game-stats">
+      <div class="shop-container">
+        <ion-button class="shop-button" expand="block" (click)="openModal()">
+          Abrir tienda
+        </ion-button>
 
-<div class="shop-container">
-  <ion-button class="shop-button" expand="block" (click)="openModal()">
-    Abrir tienda
-  </ion-button>
+        <span class="shop-shortcut">
+          Pulsa <kbd>ESC</kbd> para abrir
+        </span>
+      </div>
 
-  <span class="shop-shortcut">
-    Pulsa <kbd>ESC</kbd> para abrir
-  </span>
-</div>
+      <div class="stat dinosaurs-killed">
+        <span class="stat-label">Dinosaurios</span>
+        <span class="stat-value">
+          {{ dinosaursKilled }} / {{ levelData?.cantidadDinosaurios }}
+        </span>
+      </div>
 
       <div class="stat coins">
         <span class="stat-label">Monedas</span>
         <span class="stat-value">{{ coins }}</span>
       </div>
-
     </div>
 
 @for (dinosaur of dinosaurs; track dinosaur.id) {
@@ -77,7 +82,7 @@
 @if (gameState === 'lost') {
   <div class="game-message">
     <h2>¡Se acabó el tiempo!</h2>
-
+    
     <ion-button class="next-level-button" (click)="retryLevel()">
       Reintentar nivel
     </ion-button>

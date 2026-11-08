@@ -25,4 +25,8 @@ export class SonidosService {
     s.volume = this.sonidoMatar.volume;
     s.play().catch(() => {});
   }
+  pararSonidoMatar(): void {
+    this.sonidoMatar.pause();
+    this.sonidoMatar.currentTime = 0;
+  }
 }
