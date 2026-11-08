@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
   // Configuración de los niveles
   levels: Level[] = levels.levels;
   // Nivel actual
-  currentLevel = 5;
+  currentLevel = 1;
 
   // Datos del nivel que estamos jugando
   levelData: Level | undefined;
